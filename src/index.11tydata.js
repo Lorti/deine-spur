@@ -1,15 +1,17 @@
-const StoryblokClient = require('storyblok-js-client');
-
-const Storyblok = new StoryblokClient({
-  accessToken: process.env.STORYBLOK_TOKEN,
+const axios = require('axios');
+const md = require('markdown-it')({
+  html: true,
+  linkify: true,
+  typographer: true,
+  quotes: '„“‚‘',
 });
 
-function transformImages(html, option) {
-  return html.replace(/\/\/a.storyblok.com/g, `//img2.storyblok.com/${option}`);
-}
+const http = axios.create({
+  baseURL: 'https://cms.deinespur.at',
+});
 
-function transformRichText(block) {
-  return Storyblok.richTextResolver
+function transformText(block) {
+  return md
     .render(block)
     .replace(/<h2/g, '<h2 class="lg:text-3xl mt-12 mb-4"')
     .replace(/<p/g, '<p class="mb-4"')
@@ -18,46 +20,26 @@ function transformRichText(block) {
 }
 
 async function getIndex() {
-  const response = await Storyblok.get('cdn/stories/home');
-  const components = response.data.story.content.body;
-
   const index = {};
 
-  const introduction = components.find(
-    (component) => component.component === 'introduction'
-  );
-  index.introduction = transformRichText(introduction.text);
+  const { data: introductionResponse } = await http.get('/introduction');
+  index.introduction = transformText(introductionResponse.text);
 
-  const richText = components
-    .filter((component) => component.component === 'rich_text')
-    .map((component) => transformRichText(component.text));
-
-  // TODO Find a better way to deal with ordered blocks.
-  if (richText.length >= 2) {
-    index.beforeWorkshopBlock = richText[0].replace(
-      '<h2 class="',
-      '<h2 class="text-center '
-    );
-    index.afterWorkshopBlock = richText[1];
-  }
-
-  // TODO Delete old workshops from Storyblok as soon as the site has been updated in production.
-  const workshops = components.filter(
-    (component) => component.component === 'workshop2'
-  );
-  index.workshops = workshops.map((workshop) => ({
+  const { data: workshopsResponse } = await http.get('/workshops');
+  index.beforeWorkshopBlock = transformText(workshopsResponse.text_before)
+    .replace('<h2 class="', '<h2 class="text-center ');
+  index.workshops = workshopsResponse.workshops.map((workshop) => ({
+    icon: `https://cms.deinespur.at/${workshop.icon.url}`,
     title: workshop.title,
-    picture: workshop.picture.filename,
-    description: transformRichText(workshop.description),
+    description: transformText(workshop.description),
   }));
+  index.afterWorkshopBlock = transformText(workshopsResponse.text_after);
 
-  const team = components.filter(
-    (component) => component.component === 'team_member'
-  );
-  index.team = team.map((member) => ({
+  const { data: teamResponse } = await http.get('/team');
+  index.team = teamResponse.members.map((member) => ({
     name: member.name,
-    picture: member.picture.filename,
-    biography: Storyblok.richTextResolver.render(member.biography),
+    image: `https://cms.deinespur.at/${member.image.url}`,
+    biography: transformText(member.biography),
   }));
 
   return index;

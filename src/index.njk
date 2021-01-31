@@ -91,10 +91,10 @@ permalink: index.html
     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-12 my-16">
       {% for workshop in workshops %}
         <li>
-          <img class="block w-24 mx-auto mb-8" src="{{ workshop.picture }}">
+          <img class="block w-24 mx-auto mb-8" src="{{ workshop.icon }}">
           <h3 class="lg:text-3xl mb-4 text-center">{{ workshop.title }}</h3>
           {{ workshop.description | safe }}
-          <p><a href="mailto:office@deinespur.at?subject={{workshop.title}}">Jetzt Workshop vereinbaren</a></p>
+          <p><a href="mailto:office@deinespur.at?subject={{ workshop.title }}">Jetzt Workshop vereinbaren</a></p>
         </li>
       {% endfor %}
     </ul>
@@ -109,7 +109,7 @@ permalink: index.html
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 my-16">
       {% for member in team %}
         <li>
-          <img class="w-full" src="{{ member.picture }}" alt="{{ member.name }}">
+          <img class="w-full" src="{{ member.image }}" alt="{{ member.name }}">
           <div class="text-left my-12">
             {{ member.biography | safe }}
           </div>
