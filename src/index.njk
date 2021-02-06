@@ -103,10 +103,10 @@ permalink: index.html
     </div>
   </div>
 
-  <div id="Team" class="text-center my-24">
+  <div id="Team" class="max-w-4xl mx-auto text-center my-24">
     <img class="block w-auto h-16 mx-auto" src="logo.png">
     <h2 class="lg:text-3xl mt-12">Unser Team</h2>
-    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 my-16">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-12 my-16">
       {% for member in team %}
         <li>
           <img class="w-full" src="{{ member.image }}" alt="{{ member.name }}">
@@ -125,9 +125,11 @@ permalink: index.html
     <p class="my-4">
       <a href="mailto:office@deinespur.at">office@deinespur.at</a>
     </p>
-    <p class="my-4">
-      <a href="https://www.facebook.com/deinespur">fb.com/deinespur</a><br>
-      <a href="https://www.instagram.com/deinespur">instagram.com/deinespur</a>
+    <p class="flex justify-between w-full max-w-sm lg:max-w-lg mx-auto">
+      <a href="https://www.facebook.com/deinespur">Facebook</a>
+      <a href="https://www.instagram.com/deinespur">Instagram</a>
+      <a href="https://www.linkedin.com/company/deine-spur">LinkedIn</a>
+      <a href="https://www.youtube.com/channel/UC_0ClcnBE8igGdXCdnpxBjw">YouTube</a>
     </p>
   </div>
 </div>
