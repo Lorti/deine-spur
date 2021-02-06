@@ -7,8 +7,52 @@
   <meta name="description" content="{{ description | safe  }}">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
   <style>{% styles %}</style>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-{{ content | safe }}
+
+<nav class="sticky top-0 p-4 z-10">
+  <div class="container text-lg sm:text-xl lg:text-2xl mx-auto">
+    <div class="flex sm:pr-16">
+      <a class="hidden sm:block no-underline" href="/">
+        <img class="block w-16 h-auto" src="/logo.png" alt="Deine Spur">
+      </a>
+      <div class="flex flex-grow items-center">
+        <ul class="flex justify-between w-full max-w-sm lg:max-w-lg mx-auto">
+          <li><a class="block no-underline" href="/">Home</a></li>
+          <li><a class="block no-underline" href="/#Workshops">Workshops</a></li>
+          <li><a class="block no-underline" href="/#Team">Team</a></li>
+          <li><a class="block no-underline" href="/#Kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container text-lg sm:text-xl lg:text-2xl mx-auto px-4">
+  {{ userList }}
+  {{ content | safe }}
+
+  <footer id="Kontakt" class="text-center my-24">
+    <img class="block w-auto h-16 mx-auto" src="/logo.png">
+    <h2 class="lg:text-3xl mt-8">Deine Spur</h2>
+    <p>Nachhaltig leben lernen</p>
+    <p class="my-4">
+      <a href="mailto:office@deinespur.at">office@deinespur.at</a>
+    </p>
+    <p class="flex justify-between w-full max-w-sm lg:max-w-lg mx-auto">
+      <a href="https://www.facebook.com/deinespur">Facebook</a>
+      <a href="https://www.instagram.com/deinespur">Instagram</a>
+      <a href="https://www.linkedin.com/company/deine-spur">LinkedIn</a>
+      <a href="https://www.youtube.com/channel/UC_0ClcnBE8igGdXCdnpxBjw">YouTube</a>
+    </p>
+  </footer>
+</div>
+
 </body>
 </html>

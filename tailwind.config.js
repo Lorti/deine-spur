@@ -1,6 +1,11 @@
 module.exports = {
-  purge: ['./src/**/*.njk'],
+  purge: {
+    enabled: process.env.NODE_ENV === 'production',
+    content: ['./src/**/*.njk']
+  },
   theme: {},
   variants: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography')
+  ],
 };

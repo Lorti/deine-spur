@@ -1,0 +1,14 @@
+---
+layout: layouts/default.njk
+permalink: /blog/index.html
+---
+
+<ul class="max-w-4xl mx-auto my-12">
+  {% for post in posts %}
+    <li class="my-8">
+      <h2 class="lg:text-3xl">{{ post.title }}</h2>
+      <p>{{ post.description }}</p>
+      <a href="/blog/{{ post.slug }}/">Artikel lesen …</a>
+    </li>
+  {% endfor %}
+</ul>
