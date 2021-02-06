@@ -15,7 +15,7 @@ function renderMarkdown(markdown) {
     .replace(/\/uploads\//g, 'https://cms.deinespur.at/uploads/');
 }
 module.exports = async function() {
-  const response = await http.get('/posts?_publicationState=preview');
+  const response = await http.get('/posts');
 
   const posts = response.data;
   posts.forEach((post) => { post.text = renderMarkdown(post.text) });
