@@ -17,7 +17,7 @@ function renderMarkdown(markdown) {
 module.exports = async function() {
   const response = await http.get('/posts?_publicationState=preview');
 
-  const posts = response.data.filter((post) => post.slug?.length)
+  const posts = response.data;
   posts.forEach((post) => { post.text = renderMarkdown(post.text) });
 
   return posts;
