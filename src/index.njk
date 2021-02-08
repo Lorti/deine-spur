@@ -54,7 +54,7 @@ permalink: index.html
 <div id="Blog" class="max-w-5xl mx-auto my-24">
   <img class="block w-auto h-16 mx-auto" src="logo.png">
   <ul class="max-w-4xl mx-auto my-12">
-    {% for post in posts %}
+    {% for post in collections.posts %}
       <li class="my-8">
         <h2 class="lg:text-3xl">
           <a class="no-underline" href="/blog/{{ post.slug }}/">{{ post.title }}</a>

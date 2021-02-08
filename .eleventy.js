@@ -2,6 +2,8 @@ const path = require('path');
 const postcss = require('postcss');
 const fs = require('fs');
 
+const fetchPosts = require('./posts');
+
 async function generateStyles() {
   const filePath = path.join(__dirname, 'src/styles.css');
   const file = fs.readFileSync(filePath, 'utf-8');
@@ -21,6 +23,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget('./src/styles.css');
 
   eleventyConfig.addNunjucksAsyncShortcode('styles', () => styles);
+  eleventyConfig.addCollection('posts', fetchPosts);
 
   return {
     markdownTemplateEngine: 'njk',

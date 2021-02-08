@@ -14,6 +14,7 @@ function renderMarkdown(markdown) {
   return md.render(markdown)
     .replace(/\/uploads\//g, 'https://cms.deinespur.at/uploads/');
 }
+
 module.exports = async function() {
   const response = await http.get('/posts');
 
